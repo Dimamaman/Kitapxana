@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#141C2E"
+    android:background="@color/gray"
     android:layout_height="match_parent">
 
 
@@ -19,15 +19,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="44dp"
-        android:layout_height="34dp"
-        android:layout_margin="16dp"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnNotification"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?android:selectableItemBackground"
+        android:padding="8dp"
         android:src="@drawable/ic_bell"
-        app:layout_constraintBottom_toTopOf="@+id/search_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/dddd"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dddd" />
 
     <SearchView
         android:id="@+id/search_view"

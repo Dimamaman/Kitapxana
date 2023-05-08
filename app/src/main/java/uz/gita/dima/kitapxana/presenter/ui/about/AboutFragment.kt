@@ -32,13 +32,12 @@ class AboutFragment : Fragment(R.layout.about_fragment) {
         val book = File(requireContext().filesDir, bookData.bookName)
 
         binding.apply {
+            txtPage.text = "Page: ${bookData.page}"
+            txtGenre.text = "Book Genre: ${bookData.genre}"
             txtName.text = "Book Name: ${bookData.bookName}"
             txtAuthor.text = "Book Author: ${bookData.author}"
-            txtGenre.text = "Book Genre: ${bookData.genre}"
             txtStar.text = "Book Stars: ${bookData.startSize}"
-            txtPage.text = "Page: ${bookData.page}"
             Glide.with(requireContext()).load(bookData.imageUrl).into(imgBook)
-
             if (book.exists()) {
                 btnDownload.setImageResource(R.drawable.ic_saved)
                 btnDownload.isClickable = false
@@ -53,6 +52,8 @@ class AboutFragment : Fragment(R.layout.about_fragment) {
 
 
             btnDownload.setOnClickListener {
+                btnDownload.visibility = View.GONE
+                binding.progress.visibility = View.VISIBLE
                 viewModel.downloadBookByUrl(requireContext(), bookData)
             }
         }
@@ -62,12 +63,16 @@ class AboutFragment : Fragment(R.layout.about_fragment) {
     }
 
     private val successObserver = Observer<String> {
+        binding.progress.visibility = View.GONE
+        binding.btnDownload.visibility = View.VISIBLE
         binding.btnDownload.setImageResource(R.drawable.ic_saved)
         binding.btnDownload.isClickable = false
         Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
     }
 
     private val errorObserver = Observer<String> {
+        binding.progress.visibility = View.GONE
+        binding.btnDownloadError.visibility = View.VISIBLE
         Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
     }
 }
