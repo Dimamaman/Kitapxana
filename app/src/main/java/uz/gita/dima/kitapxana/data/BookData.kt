@@ -10,6 +10,7 @@ data class BookData(
     val bookUrl: String = "",
     val imageUrl: String = "",
     val genre: String = "",
+    val page: String = "",
     val path: String = "",
     val startSize: String = ""
 ): Parcelable

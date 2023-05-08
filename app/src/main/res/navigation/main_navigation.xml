@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_readBookFragment"
+            app:destination="@id/readBookFragment" />
     </fragment>
 
     <fragment
@@ -53,7 +56,13 @@
         android:label="ReadBookFragment"
         tools:layout="@layout/read_book_fragment">
         <argument
-            android:name="book"
-            app:argType="uz.gita.dima.kitapxana.data.BookData" />
+            android:name="savedPage"
+            app:argType="integer" />
+        <argument
+            android:name="totalPage"
+            app:argType="integer" />
+        <argument
+            android:name="bookName"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -36,6 +36,7 @@ class AboutFragment : Fragment(R.layout.about_fragment) {
             txtAuthor.text = "Book Author: ${bookData.author}"
             txtGenre.text = "Book Genre: ${bookData.genre}"
             txtStar.text = "Book Stars: ${bookData.startSize}"
+            txtPage.text = "Page: ${bookData.page}"
             Glide.with(requireContext()).load(bookData.imageUrl).into(imgBook)
 
             if (book.exists()) {

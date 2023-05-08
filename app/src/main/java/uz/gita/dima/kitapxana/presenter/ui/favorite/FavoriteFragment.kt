@@ -34,7 +34,7 @@ class FavoriteFragment: Fragment(R.layout.favorite_fragment) {
 
         favoriteAdapter.setClickListener {
             Log.d("AAA", it.toString())
-            val action = FavoriteFragmentDirections.actionFavoriteFragmentToReadBookFragment(it)
+            val action = FavoriteFragmentDirections.actionFavoriteFragmentToReadBookFragment(0,it.page.toInt(),it.bookName)
             findNavController().navigate(action)
 
 //            parentFragment?.findNavController(requireActivity(),R.id.action_favoriteFragment_to_readBookFragment)

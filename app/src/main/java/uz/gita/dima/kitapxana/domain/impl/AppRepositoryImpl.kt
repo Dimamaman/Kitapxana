@@ -32,10 +32,12 @@ class AppRepositoryImpl @Inject constructor(): AppRepository {
                         it.get("bookUrl") as String,
                         it.get("imageUrl") as String,
                         it.get("genre") as String,
+                        it.get("page") as String,
                         it.get("path") as String,
                         it.get("startSize") as String
                     )
                     datum.add(imageData)
+                    Log.d("RRR","getAllData size -> $imageData")
                 }
                 trySend(Result.success(datum))
 
@@ -54,7 +56,7 @@ class AppRepositoryImpl @Inject constructor(): AppRepository {
                     for (document in it.result) {
                         list.add(document.toObject(BookData::class.java))
                     }
-                    Log.d("RRR","List size -> ${list.size}")
+                    Log.d("RRR","getBookByCategory size -> ${list.size}")
                     trySend(Result.success(list))
                 }
             }
@@ -89,7 +91,7 @@ class AppRepositoryImpl @Inject constructor(): AppRepository {
                 val list = arrayListOf<BookData>()
                 it.forEach { data ->
                     val book = File(context.filesDir, data.get("bookName").toString())
-                    Log.d("UUU","File book -> $book")
+                    Log.d("RRR","File book -> $book")
                     if (book.exists()) {
                         val temp = data.toObject(BookData::class.java)
                         list.add(temp)
