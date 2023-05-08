@@ -32,6 +32,7 @@ class ExploreAdapter @Inject constructor() : Adapter<ExploreAdapter.ItemHolder>(
 
         private val innerAdapter = HorizontalExploreAdapter()
 
+        @SuppressLint("SuspiciousIndentation")
         fun bind(data: CategoryData) {
             binding.horizontalRv.layoutManager =
                     LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
