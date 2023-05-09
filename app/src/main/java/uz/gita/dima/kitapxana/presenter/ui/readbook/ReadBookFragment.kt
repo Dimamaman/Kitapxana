@@ -2,7 +2,9 @@ package uz.gita.dima.kitapxana.presenter.ui.readbook
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -12,10 +14,12 @@ import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
 import com.github.barteksc.pdfviewer.util.FitPolicy
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.dima.kitapxana.R
 import uz.gita.dima.kitapxana.data.local.sharedPref.SharedPref
 import uz.gita.dima.kitapxana.databinding.ReadBookFragmentBinding
+import uz.gita.dima.kitapxana.presenter.ui.main.MainFragment
 import java.io.File
 import javax.inject.Inject
 
@@ -29,6 +33,16 @@ class ReadBookFragment: Fragment(R.layout.read_book_fragment) , OnPageChangeList
     @Inject lateinit var sharedPref: SharedPref
     private val arg by navArgs<ReadBookFragmentArgs>()
     private val binding by viewBinding(ReadBookFragmentBinding::bind)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView?.visibility = View.GONE
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,5 +105,11 @@ class ReadBookFragment: Fragment(R.layout.read_book_fragment) , OnPageChangeList
 
     override fun onPageError(page: Int, t: Throwable?) {
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView?.visibility = View.VISIBLE
     }
 }

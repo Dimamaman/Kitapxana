@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.dima.kitapxana.R
 import uz.gita.dima.kitapxana.databinding.MainFragmentBinding
@@ -61,5 +62,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
             true
         }*/
+    }
+
+    fun goneBottomNavigationView() {
+        binding.bottomNavigationView.visibility = View.GONE
     }
 }

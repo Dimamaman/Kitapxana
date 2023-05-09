@@ -2,7 +2,9 @@ package uz.gita.dima.kitapxana.presenter.ui.about
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,11 +13,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.dima.kitapxana.R
 import uz.gita.dima.kitapxana.databinding.AboutFragmentBinding
 import uz.gita.dima.kitapxana.presenter.ui.about.viewmodel.AboutViewModel
 import uz.gita.dima.kitapxana.presenter.ui.about.viewmodel.impl.AboutViewModelImpl
+import uz.gita.dima.kitapxana.presenter.ui.main.MainFragment
 import java.io.File
 
 @AndroidEntryPoint
@@ -24,6 +28,16 @@ class AboutFragment : Fragment(R.layout.about_fragment) {
     private val args by navArgs<AboutFragmentArgs>()
     private val binding by viewBinding(AboutFragmentBinding::bind)
     private val viewModel: AboutViewModel by viewModels<AboutViewModelImpl>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView?.visibility = View.GONE
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,5 +88,11 @@ class AboutFragment : Fragment(R.layout.about_fragment) {
         binding.progress.visibility = View.GONE
         binding.btnDownloadError.visibility = View.VISIBLE
         Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView?.visibility = View.VISIBLE
     }
 }
