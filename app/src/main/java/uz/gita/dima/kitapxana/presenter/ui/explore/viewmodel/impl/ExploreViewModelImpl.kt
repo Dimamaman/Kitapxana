@@ -8,13 +8,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.gita.dima.kitapxana.data.CategoryData
-import uz.gita.dima.kitapxana.domain.AppRepository
+import uz.gita.dima.kitapxana.domain.usescase.interfaces.BooksByCategoryUseCase
 import uz.gita.dima.kitapxana.presenter.ui.explore.viewmodel.ExploreViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ExploreViewModelImpl @Inject constructor(
-    private val appRepository: AppRepository
+    private val booksByCategoryUseCase: BooksByCategoryUseCase
 ): ViewModel(), ExploreViewModel {
     override val categoriesData = MutableLiveData<List<CategoryData>>()
     override val errorData = MutableLiveData<String>()
@@ -23,7 +23,7 @@ class ExploreViewModelImpl @Inject constructor(
 
     override fun getBooksByCategory() {
 
-            appRepository.getBooksByCategory()
+        booksByCategoryUseCase.getBooksByCategory()
                 .onEach { result ->
                     result.onSuccess { list ->
                         val fantasyData = list.filter { it.genre == "fantasy" }

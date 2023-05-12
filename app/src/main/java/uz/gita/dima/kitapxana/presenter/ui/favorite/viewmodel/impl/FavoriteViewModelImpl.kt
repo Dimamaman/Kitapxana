@@ -8,19 +8,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.gita.dima.kitapxana.data.BookData
-import uz.gita.dima.kitapxana.domain.AppRepository
+import uz.gita.dima.kitapxana.domain.usescase.interfaces.SavedBooksUseCase
 import uz.gita.dima.kitapxana.presenter.ui.favorite.viewmodel.FavoriteViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModelImpl @Inject constructor(
-    private val appRepository: AppRepository
+    private val savedBooksUseCase: SavedBooksUseCase
 ): ViewModel(), FavoriteViewModel {
     override val errorData = MutableLiveData<String>()
     override val booksData = MutableLiveData<List<BookData>>()
 
     override fun getAllData(context: Context) {
-        appRepository.getSavedBooks(context).onEach {
+        savedBooksUseCase.getSavedBooks(context).onEach {
             it.onSuccess {
                 booksData.value = it
             }

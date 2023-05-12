@@ -7,19 +7,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.gita.dima.kitapxana.data.BookData
-import uz.gita.dima.kitapxana.domain.AppRepository
+import uz.gita.dima.kitapxana.domain.usescase.interfaces.AllBooksUseCase
 import uz.gita.dima.kitapxana.presenter.ui.home.viewmodel.HomeFragmentViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeFragmentViewModelImpl @Inject constructor(
-    private val appRepository: AppRepository
+    private val allBooksUseCase: AllBooksUseCase
 ): ViewModel(), HomeFragmentViewModel {
     override val errorMessage = MutableLiveData<String>()
     override val allImages = MutableLiveData<List<BookData>>()
 
     override fun getAll() {
-        appRepository.getAllData().onEach {
+        allBooksUseCase.getAllData().onEach {
             it.onSuccess {
                 allImages.value = it
             }
