@@ -30,24 +30,13 @@ interface AppRepositoryModule {
     fun getAllBooksRepository(impl: AllBooksRepositoryImpl): AllBooksRepository
 
     @[Binds Singleton]
-    fun getAllBooksUsesCase(impl: AllBooksUseCaseImpl): AllBooksUseCase
-
-    @[Binds Singleton]
     fun getBooksByCategoryRepository(impl: BooksByCategoryImpl): BooksByCategory
-
-    @[Binds Singleton]
-    fun getBooksCategoryUseCase(impl: BooksByCategoryUseCaseImpl): BooksByCategoryUseCase
 
     @[Binds Singleton]
     fun getDownloadBookByUrlRepository(impl: DownloadBookByUrlRepositoryImpl): DownloadBookByUrlRepository
 
-    @[Binds Singleton]
-    fun getDownloadBookByUrlUseCase(impl: DownloadBookByUrlUseCaseImpl): DownloadBookByUrlUseCase
 
     @[Binds Singleton]
     fun getSavedBooksRepository(impl: SavedBooksRepositoryImpl): SavedBooksRepository
-
-    @[Binds Singleton]
-    fun getSavedBooksUseCase(impl: SavedBooksUseCaseImpl): SavedBooksUseCase
 
 }
